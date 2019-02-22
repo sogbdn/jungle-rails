@@ -4,6 +4,15 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if (cart_subtotal_cents == 0)  %>
+    <h3 class="empty card"> 
+      Sorry, but your cart is actually empty... Go back to the home page and enjoy!
+      </br>
+      </br>
+      <%= link_to 'Home', :root %>     
+    </h3>
+  <%  else  %>
+
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -48,5 +57,6 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
 </section>
