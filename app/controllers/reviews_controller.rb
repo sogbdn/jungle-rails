@@ -1,22 +1,42 @@
 class ReviewsController < ApplicationController
 
+  before_action :require_login
+
   def create
 
-    puts params
+    @product = Product.find(params[:product_id])
+    @review = Review.new()
+    @review.product = @product
+    @review.user = current_user
+    @review.rating = params[:review][:rating]
+    @review.description = params[:review][:description]
 
-    product = Product.find(params[:product_id])
-    review = Review.new(review_params)
-    review.product = product
-
-    if review.save
-      redirect_to product_path(params[:product_id]), notice: 'Review created'
+    if @review.save!
+      redirect_to product_path(params[:product_id]), notice: "Review created"
     end
   end  
 
-  private
+  def destroy
+    review = Review.find(params[:id])
 
-  def review_params
-    params.require(:review).permit(:description)
+    if review.destroy 
+      redirect_to product_path(params[:product_id]), notice: "Review deleted"
+    else
+      redirect_to product_path(params[:product_id]), notice: "Could not delete the Review"
+    end
+  end
+
+  private
+  def require_login
+    puts session[:user_id]
+    if session[:user_id] == nil
+      flash[:error] = "You must be logged in to create or delete a review"
+      redirect_to "/login"
+    end
   end
 
 end
+  
+
+
+  
