@@ -28,29 +28,32 @@
     </br>
   </article>
 
-    <div class="review">   
-        <h4>Reviews</h4>
+    <div class="review"> 
+       <% if session[:user_id] %>    
+          <h4>Reviews</h4>
 
-      <div class="new-review"> 
-          <%= form_for [@product, @review] do |f| %>
-          <%= f.text_area :description %>
-          <%= f.select :rating, ['1/5', '2/5', '3/5', '4/5', '5/5'] %> 
-          <%= f.submit "Create review and rating /5", class: "btn btn-primary" %>
-          <% end %>
-      </div>  
+          <div class="new-review"> 
+            <%= form_for [@product, @review] do |f| %>
+            <%= f.text_area :description %>
+            <%= f.select :rating, ['1/5', '2/5', '3/5', '4/5', '5/5'] %> 
+            <%= f.submit "Create review and rating /5", class: "btn btn-primary" %>
+            <% end %>
+        <% end %>
+    </div>  
 
-      <div class="list-review">                
-          <% @product.review.each do |r| %>
-            <div style="border: 1px solid grey; margin: 5px; padding:5px; border-radius: 5px;">
-            <dd> <%= r.user.first_name  %>  <dd/>
+    <div class="list-review"> 
+      <div style="border: 1px solid grey; margin: 5px; padding:5px; border-radius: 5px;">
+        <% @product.review.reverse.each do |r| %>
+            <dd> <%= r.user.first_name  %> <dd/>
             <dd> Comments: <%= r.description %> <dd/>
             <dd> Gives rate: <%= r.rating %>/5 <dd/>
-            <dd><%= @review.description %></dd> 
-            <dd><%= link_to 'delete', product_review_path(r.product, r.id), method: :delete, data: ("Are you sure?"), id: r.id%></dd>     
-            </div>
-          <% end %>   
-      </div>
 
+            <dd><% if session[:user_id] == r.user.id %></dd>                          
+              <dd><%= link_to 'delete', product_review_path(r.product, r.id), method: :delete, data: ("Are you sure?"), id: r.id%></dd>     
+              <dd><% end %></dd>
+            <% end %> 
+          </div>
     </div>
   
 </section>
+

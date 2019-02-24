@@ -28,7 +28,6 @@ class ReviewsController < ApplicationController
 
   private
   def require_login
-    puts session[:user_id]
     if session[:user_id] == nil
       flash[:error] = "You must be logged in to create or delete a review"
       redirect_to "/login"
