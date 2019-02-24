@@ -40,7 +40,7 @@ cat1.products.create!({
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
   quantity: 0,
-  price: 64.99
+  price: 64.99,
 })
 
 cat1.products.create!({
@@ -82,7 +82,6 @@ cat1.products.create!({
   quantity: 82,
   price: 224.50
 })
-
 
 cat2.products.create!({
   name:  'Modern Skateboards',
@@ -131,6 +130,14 @@ cat3.products.create!({
   quantity: 23,
   price: 2_483.75
 })
+
+# REVIEWS
+
+product = Product.first
+user = User.create({first_name: "a", last_name: "a", email: "a", password: "a"})
+
+product.review.create!({ user: user, description: 'hahaha', rating:'1'})
+product.review.create!({ user: user, description: 'hihihi', rating:'1'})
 
 
 puts "DONE!"
