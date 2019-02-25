@@ -131,13 +131,3 @@ cat3.products.create!({
   price: 2_483.75
 })
 
-# REVIEWS
-
-product = Product.first
-user = User.create({first_name: "a", last_name: "a", email: "a", password: "a"})
-
-product.review.create!({ user: user, description: 'hahaha', rating:'1'})
-product.review.create!({ user: user, description: 'hihihi', rating:'1'})
-
-
-puts "DONE!"
