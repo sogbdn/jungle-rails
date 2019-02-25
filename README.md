@@ -26,3 +26,11 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
 * PostgreSQL 9.x
 * Stripe
+
+## Screenshots
+
+!["Login and product](https://github.com/sogbdn/jungle-rails/blob/master/docs/Jungle%20Login%20and%20product.png)
+!["Products"](https://github.com/sogbdn/jungle-rails/blob/master/docs/Jungle%20Products.png)
+
+
+
